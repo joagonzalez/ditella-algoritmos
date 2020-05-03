@@ -45,12 +45,22 @@ def formatear(dependencias):
 
     return resultado
 
-def guardar_dependencias(dependencias, filename):
+def guardar_dependencias(lista_departamentos, dependencias_por_departamento, filename):
     """
     Funcion que recibe como parametro una lista de dependencias correctamente
     formateadas y el nombre del archivo en el que se guardaran los resultados 
     """
-    pass
+    try:
+        f = open(filename, 'w')
+    except Exception as e:
+        print('Error al crear el archivo de destino' + str(e))
+
+    for departamento in lista_departamentos:
+        f.write(departamento + ': ')
+        for dependencia in dependencias_por_departamento[departamento]:
+            f.write(str(dependencia) + ' ')
+        f.write('\n')
+    f.close()        
 
 # $ python3 departamentos_judiciales.py mapa-judicial.csv departamentos.txt
 if __name__ == '__main__':
@@ -62,18 +72,21 @@ if __name__ == '__main__':
 
     dependencias = abrir_archivo(SRC_FILENAME)
     dependencias_formateadas = formatear(dependencias)
+    departamentos_ordenados = sorted(dependencias_formateadas.keys())
+
+    # Ordenamos las dependencias de todos los departamentos 
+    for departamento, dependencias in dependencias_formateadas.items():
+        bubble_sort(dependencias_formateadas[departamento])
+
+    guardar_dependencias(departamentos_ordenados, dependencias_formateadas, DST_FILENAME) # guardamos archivo con dependencias ordenadas y formateadas
+
     #print(dependencias_formateadas['AZUL'])
-    for dependencia in dependencias_formateadas['AZUL']:
-        print(dependencia)
-
-    bubble_sort(dependencias_formateadas['AZUL']) # ordenamos dependencias de departamento azul
-    print('#############################')
-    for dependencia in dependencias_formateadas['AZUL']:
-        print(dependencia)
-
-    print(sorted(dependencias_formateadas.keys()))
-    dependencias_ordenadas = sorted(dependencias_formateadas.keys())
-
+    # for dependencia in dependencias_formateadas['AZUL']:
+    #     print(dependencia)
+    # bubble_sort(dependencias_formateadas['AZUL']) # ordenamos dependencias de departamento azul
+    # print('#############################')
+    # for dependencia in dependencias_formateadas['AZUL']:
+    #     print(dependencia)
+    # print(sorted(dependencias_formateadas.keys()))
     #print(dependencias_formateadas)
-    #guardar_dependencias(dependencias, DST_FILENAME) # guardamos archivo con dependencias ordenadas y formateadas
 
