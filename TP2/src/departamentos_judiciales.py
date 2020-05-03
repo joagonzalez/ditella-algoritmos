@@ -27,8 +27,8 @@ def bubble_sort(lista):
 def formatear(dependencias):
     """
     Funcion que recibe una lista de objetos DependenciaJudicial y genera 
-    una lista de diccionarios con key = departamento y value = lista de 
-    dependencias y ese departamento. La lista estara ordenada por key
+    un diccionario con key = departamento y value = lista de dependencias
+    de ese departamento. La lista se ordenara posteriormente por key
     """
     departamentos = set() # guardamos departamentos en conjunto, ya que no queremos elementos repetidos
     resultado = {}
@@ -39,7 +39,7 @@ def formatear(dependencias):
     for departamento in departamentos:
         dependencias_en_departamento = [] # inicializamos lista por cada iteracion de departamento
         for dependencia in dependencias:
-            if departamento in dependencia.departamento_judicial():
+            if departamento == dependencia.departamento_judicial():
                  dependencias_en_departamento.append(dependencia)
         resultado[departamento] = dependencias_en_departamento # se guardan todas las dependencias de un departamento en un diccionario key=deparamento
 
@@ -72,21 +72,13 @@ if __name__ == '__main__':
 
     dependencias = abrir_archivo(SRC_FILENAME)
     dependencias_formateadas = formatear(dependencias)
+
+    # Ordenamos departamentos (llaves del diccionario que devuelve funcion formatear)
     departamentos_ordenados = sorted(dependencias_formateadas.keys())
 
     # Ordenamos las dependencias de todos los departamentos 
     for departamento, dependencias in dependencias_formateadas.items():
         bubble_sort(dependencias_formateadas[departamento])
 
+    # Guardamos los datos en el formato requerido
     guardar_dependencias(departamentos_ordenados, dependencias_formateadas, DST_FILENAME) # guardamos archivo con dependencias ordenadas y formateadas
-
-    #print(dependencias_formateadas['AZUL'])
-    # for dependencia in dependencias_formateadas['AZUL']:
-    #     print(dependencia)
-    # bubble_sort(dependencias_formateadas['AZUL']) # ordenamos dependencias de departamento azul
-    # print('#############################')
-    # for dependencia in dependencias_formateadas['AZUL']:
-    #     print(dependencia)
-    # print(sorted(dependencias_formateadas.keys()))
-    #print(dependencias_formateadas)
-
