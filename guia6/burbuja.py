@@ -25,7 +25,8 @@ def booble_order(list):
 
 if __name__ == '__main__':
     fill_list(10)
-    print(booble_order(lista))    
+    print(booble_order(lista)) 
+    # print(booble_order([9,5,333,4,5,6,2,1,98,0,34,56,76,11,1,1,3,5,7,67]))   
 
 
 

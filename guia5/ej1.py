@@ -1,7 +1,7 @@
 import sys
 
 def jaccard(a, b):
-    result = len(intersection(a,b))/len(union(a,b))
+    result = len(intersection(a,b))/float(len(union(a,b)))
 
     return result
 
