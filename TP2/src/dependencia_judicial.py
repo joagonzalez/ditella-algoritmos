@@ -95,33 +95,33 @@ class DependenciaJudicial():
         """
         return ((float(self._latitud) - lat)**2 + (float(self._longitud) - long)**2)**0.5
 
-def abrir_archivo(filename):
+def abrir_archivo(filename):                            # O(2*len(dependencias))
     """
     funcion que nos permite abrir archivo de dependencias
     tratando excepciones. Da como salida una lista donde 
     cada elemento tiene la informacion de una dependencia
     """
-    dependencias = []
-    lineas = []
+    dependencias = []                                   # O(1)
+    lineas = []                                         # O(1)
 
     try:
-        f = open(filename, encoding=FILE_ENCODING)
-        for linea in f:
-            lineas.append(linea)
-        f.close()
+        f = open(filename, encoding=FILE_ENCODING)      # O(1)
+        for linea in f:                                 # O(len(dependencias))
+            lineas.append(linea)                        # O(1)
+        f.close()                                       # O(1)
         
-        lineas = lineas[1:] # se limpian headers del csv
+        lineas = lineas[1:] # se limpian headers del csv    # O(1)
         
-        for dependencia in lineas:
-            dependencias.append(DependenciaJudicial(dependencia))
+        for dependencia in lineas:                      # O(len(dependencias)-1)
+            dependencias.append(DependenciaJudicial(dependencia))   # O(1)
 
-        return dependencias
+        return dependencias                             # O(1)
     except FileNotFoundError as e:
-        print('El archivo no existe. \n' + str(e))
-        return None
+        print('El archivo no existe. \n' + str(e))      # O(1)
+        return None                                     # O(1)
     except Exception as e:
-        print('Error al abrir el archivo. \n' + str(e))
-        return None
+        print('Error al abrir el archivo. \n' + str(e)) # O(1)
+        return None                                     # O(1)
 
 if __name__ == '__main__':
     dependencias = abrir_archivo('../data/mapa-judicial.csv')
