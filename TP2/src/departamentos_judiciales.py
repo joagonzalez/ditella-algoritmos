@@ -80,5 +80,5 @@ if __name__ == '__main__':
     for departamento, dependencias in dependencias_formateadas.items():
         bubble_sort(dependencias_formateadas[departamento])
 
-    # Guardamos los datos en el formato requerido
-    guardar_dependencias(departamentos_ordenados, dependencias_formateadas, DST_FILENAME) # guardamos archivo con dependencias ordenadas y formateadas
+    # Guardamos los datos en el formato y orden requerido 
+    guardar_dependencias(departamentos_ordenados, dependencias_formateadas, DST_FILENAME)
