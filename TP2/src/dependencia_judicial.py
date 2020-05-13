@@ -112,7 +112,7 @@ def abrir_archivo(filename):                            # O(2*len(dependencias))
         
         lineas = lineas[1:] # se limpian headers del csv    # O(1)
         
-        for dependencia in lineas:                      # O(len(dependencias)-1)
+        for dependencia in lineas:                      # O(len(dependencias))
             dependencias.append(DependenciaJudicial(dependencia))   # O(1)
 
         return dependencias                             # O(1)

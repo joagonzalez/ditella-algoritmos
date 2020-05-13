@@ -61,17 +61,17 @@ def guardar_dependencias(lista_departamentos, dependencias_por_departamento, fil
     for departamento in lista_departamentos:                                # O(len(departamentos)*len(dependencias))
         f.write(departamento + ': ')                                        # O(1)
         for dependencia in dependencias_por_departamento[departamento]:     # O(len(dependencias))
-            f.write(str(dependencia) + ' ')                                 # O(1)
+            f.write(str(dependencia))                                       # O(1)
         f.write('\n')                                                       # O(1)
     f.close()                                                               # O(1)
 
 # $ python3 departamentos_judiciales.py mapa-judicial.csv departamentos.txt
 if __name__ == '__main__':
-    try:
-        SRC_FILENAME = FOLDER + sys.argv[1]                                 # O(1)
-        DST_FILENAME = FOLDER + sys.argv[2]                                 # O(1)
+    try:                                                                    # string concat O(M+N)    
+        SRC_FILENAME = FOLDER + sys.argv[1]                                 # O(len(FOLDER) + len(len(sys.argv[1])))
+        DST_FILENAME = FOLDER + sys.argv[2]                                 # O(len(FOLDER) + len(len(sys.argv[2])))
     except Exception as e:
-        print('Los parametros <SRC FILENAME> <DST LATITUD> no fueron ingresados correctamente. \n' + str(e))    # O(1)
+        print('Los parametros <SRC FILENAME> <DST FILENAME> no fueron ingresados correctamente. \n' + str(e))    # O(1)
 
     dependencias = abrir_archivo(SRC_FILENAME)                              # O(2*len(dependencias))
     dependencias_formateadas = formatear(dependencias)                      # O(len(dependencias)*len(departamentos))
@@ -80,8 +80,9 @@ if __name__ == '__main__':
     departamentos_ordenados = sorted(dependencias_formateadas.keys())       # O(len(departamentos)*log(len(departamentos)))
 
     # Ordenamos las dependencias de todos los departamentos 
-    for departamento, dependencias in dependencias_formateadas.items():     # O(len(departamentos)*(len(dependencias))^2)
-        bubble_sort(dependencias_formateadas[departamento])                 # O(len(dependencias)^2)
+    for departamento, dependencias in dependencias_formateadas.items():     # O(len(departamentos)*(len(dependencias)*log(len(dependencias)))
+        dependencias_formateadas[departamento] = sorted(dependencias_formateadas[departamento])   # O(len(dependencias)*log(len(dependencias)))
+        #bubble_sort(dependencias_formateadas[departamento])                # O(len(dependencias)^2) - Si usaramos implementacion propia de bubble_sort
 
     # Guardamos los datos en el formato y orden requerido 
     guardar_dependencias(departamentos_ordenados, dependencias_formateadas, DST_FILENAME)   # O(len(departamentos)*len(dependencias))
