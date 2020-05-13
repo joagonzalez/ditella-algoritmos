@@ -106,7 +106,7 @@ def abrir_archivo(filename):                            # O(2*len(dependencias))
 
     try:
         f = open(filename, encoding=FILE_ENCODING)      # O(1)
-        for linea in f:                                 # O(len(dependencias))
+        for linea in f:                                 # O(len(dependencias)+1) pues headers en primera linea
             lineas.append(linea)                        # O(1)
         f.close()                                       # O(1)
         
