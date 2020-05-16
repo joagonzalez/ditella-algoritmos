@@ -1,5 +1,4 @@
 import sys
-import json
 from dependencia_judicial import DependenciaJudicial, abrir_archivo
 
 FOLDER = '../data/'
