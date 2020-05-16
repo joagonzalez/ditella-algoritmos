@@ -91,9 +91,14 @@ class DependenciaJudicial():
     def distancia(self, lat, long):
         """
         Retornamos distancia euclidea entre dependencia juficial
-        y el punto que se pasa como parametro del metodo
+        y el punto que se pasa como parametro del metodo.
+        Convertimos a km las diferencias en latitud y longitud.
+        Cada grado en latitud son 111Km y en longitud 111.321km
+        aproximadamente.
         """
-        return ((float(self._latitud) - lat)**2 + (float(self._longitud) - long)**2)**0.5
+        delta_lat_km = (float(self._latitud) - lat) * 111
+        delta_long_km = (float(self._longitud) - long) * 111.321
+        return (delta_lat_km**2 + delta_long_km**2)**0.5
 
 def abrir_archivo(filename):                            # O(2*len(dependencias))
     """
