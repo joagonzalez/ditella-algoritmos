@@ -1,0 +1,42 @@
+Fundamentos de Algoritmos - MiM - UTDT
+Examen - Mayo 2020
+Nombre: Juan de los Palotes
+------
+
+Problema 1:
+
+La lista range(n) se evalúa como [0,1,2,...n-1]. Para cada uno de esos elementos, se evalúa si es par o no, construyendo así por comprensión la lista deseada.
+
+def altboot(n):
+  return [x%2==0 for x in range(n)]
+
+
+------
+
+Problema 2:
+
+Algoritmo en pseudo-código:
+
+def buscar_as_corazones(cofres):
+  # Recorro uno por uno los cofres de la lista.
+  for c in cofres:
+
+    # Para cada cofre, tomo su mazo de cartas y las recorro una por una.
+    m = tomar mazo del cofre c
+    for x in m:
+      # Si la carta actual es la buscada, recuerdo el cofre actual.
+      if x == as de corazones:
+        cofre_con_as = c
+
+  # Retorno el cofre que tiene el as.
+  return cofre_con_as
+
+
+Este algoritmo tiene complejidad O(N*M), porque recorre las M cartas de cada uno de los N cofres.
+El resto de las operaciones involucradas es O(1). En particular, supongo que la operación "tomar mazo del cofre" tiene O(1). 
+Entonces, como el algoritmo repite N veces una búsqueda de M pasos, la complejidad final es orden N*M.
+
+------
+
+...
+
